@@ -47,7 +47,7 @@ jobs:
           pytest --testmon
           # coverage run -m pytest  -v -s --testmon
 
-      - name: Generate Coverage Report
-        run: |
-          coverage report -m
+          #- name: Generate Coverage Report
+          #run: |
+          #coverage report -m
       
