@@ -5,5 +5,5 @@ def calculate_volume_cube(length: int | float) -> int | float:
     :return: volume of the cube
     """
     if not isinstance(length, (int, float)) or length <= 0:
-        raise TypeError("Length must be a positive non-zero number")
+        raise TypeError("Length must be a positive non--zero number")
     return length * length * length
