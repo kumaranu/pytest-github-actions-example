@@ -37,10 +37,12 @@ jobs:
             testmon-${{ github.ref_name }}-
             testmon-
 
-            #- name: Check .testmondata
-            #run: ls -la .testmondata
+      - name: Check .testmondata
+        run: ls -la .testmondata
 
       - name: Test with pytest
+        env: |
+          TESTMON_DATAFILE: ${{ github.workspace }}/.testmondata
         run: |
           coverage run -m pytest  -v -s --testmon
 
