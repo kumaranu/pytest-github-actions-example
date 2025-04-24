@@ -44,7 +44,8 @@ jobs:
         env:
           TESTMON_DATAFILE: ${{ github.workspace }}/.testmondata
         run: |
-          coverage run -m pytest  -v -s --testmon
+          pytest --testmon
+          # coverage run -m pytest  -v -s --testmon
 
       - name: Generate Coverage Report
         run: |
