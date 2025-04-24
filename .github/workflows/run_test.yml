@@ -37,8 +37,8 @@ jobs:
             testmon-${{ github.ref_name }}-
             testmon-
 
-      - name: Check .testmondata
-        run: ls -la .testmondata
+            #- name: Check .testmondata
+            #run: ls -la .testmondata
 
       - name: Test with pytest
         run: |
