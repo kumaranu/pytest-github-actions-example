@@ -41,7 +41,7 @@ jobs:
         run: ls -la .testmondata
 
       - name: Test with pytest
-        env: |
+        env:
           TESTMON_DATAFILE: ${{ github.workspace }}/.testmondata
         run: |
           coverage run -m pytest  -v -s --testmon
