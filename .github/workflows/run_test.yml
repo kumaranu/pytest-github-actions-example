@@ -11,23 +11,43 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
       - name: Lint with Ruff
         run: |
           pip install ruff
           ruff --format=github --target-version=py310 .
         continue-on-error: true
+
+      - uses: actions/cache@v4
+        with:
+          path: .testmondata
+          key: testmon-${{ github.sha }}
+          restore-keys: |
+            testmon-${{ github.ref }}-
+            testmon-${{ github.ref_name }}-
+            testmon-
+
+      - name: Check .testmondata
+        run: ls -la .testmondata
+
       - name: Test with pytest
+        env:
+          TESTMON_DATAFILE: ${{ github.workspace }}/.testmondata
         run: |
-          coverage run -m pytest  -v -s
-      - name: Generate Coverage Report
-        run: |
-          coverage report -m
+          pytest --testmon
+          # coverage run -m pytest  -v -s --testmon
+
+          #- name: Generate Coverage Report
+          #run: |
+          #coverage report -m
       
